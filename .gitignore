@@ -1,0 +1,11 @@
+build/
+*.old
+.vscode/
+keys/
+spiffs/
+CMakeCache.txt
+CMakeFiles/
+spiffs.bin
+*_key.*
+firmware/sdkconfig
+

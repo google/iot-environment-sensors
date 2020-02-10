@@ -1,0 +1,18 @@
+[submodule "components/arduino"]
+	path = third_party/arduino_esp32
+	url = https://github.com/espressif/arduino-esp32
+[submodule "components/sensor-scd30/sparkfun"]
+	path = third_party/sparkfun_scd30
+	url = https://github.com/bobobo1618/SparkFun_SCD30_Arduino_Library
+[submodule "components/sensor-sgp30/sparkfun"]
+	path = third_party/sparkfun_scd30
+	url = https://github.com/sparkfun/SparkFun_SGP30_Arduino_Library
+[submodule "components/sensor-bmp280/adafruit"]
+	path = third_party/adafruit_bmp280
+	url = https://github.com/adafruit/Adafruit_BMP280_Library
+[submodule "components/google-mqtt/google-cloud-iot-arduino"]
+	path = third_party/google_cloud_iot_arduino
+	url = https://github.com/GoogleCloudPlatform/google-cloud-iot-arduino
+[submodule "components/google-mqtt/mqtt"]
+	path = third_party/arduino_mqtt
+	url = https://github.com/256dpi/arduino-mqtt
