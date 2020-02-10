@@ -1,0 +1,38 @@
+syntax = "proto2";
+
+message BMP280Reading {
+    optional float temperature = 1;
+    optional float pressure = 2;
+}
+
+message SCD30Reading {
+    optional float temperature = 1;
+    optional float humidity = 2;
+    optional float co2 = 3;
+}
+
+message SGP30Reading {
+    optional uint32 co2 = 1;
+    optional uint32 tvoc = 2;
+    optional uint32 baseline_co2 = 3;
+    optional uint32 baseline_tvoc = 4;
+    optional uint32 h2 = 5;
+    optional uint32 ethanol = 6;
+}
+
+message SMUART04LReading {
+  optional uint32 pm10_smoke = 1;
+  optional uint32 pm25_smoke = 2;
+  optional uint32 pm100_smoke = 3;
+  optional uint32 pm10_env = 4;
+  optional uint32 pm25_env = 5;
+  optional uint32 pm100_env = 6;
+}
+
+message SensorUpdate {
+    optional uint64 timestamp = 1;
+    optional BMP280Reading bmp280 = 2;
+    optional SCD30Reading scd30 = 3;
+    optional SGP30Reading sgp30 = 4;
+    optional SMUART04LReading smuart04l = 5;
+}
