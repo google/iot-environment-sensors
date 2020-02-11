@@ -14,5 +14,5 @@
 	path = third_party/sparkfun_scd30
 	url = https://github.com/sparkfun/SparkFun_SCD30_Arduino_Library
 [submodule "third_party/arduino_esp32"]
-	path = third_party/arduino_esp32
+	path = firmware/components/arduino
 	url = https://github.com/espressif/arduino-esp32
