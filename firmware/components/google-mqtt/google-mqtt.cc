@@ -109,7 +109,7 @@ void messageReceived(String &topic, String &payload) {
 void WifiConnect() {
   Serial.printf("WiFi: Connecting to WiFi...");
   WiFi.mode(WIFI_STA);
-  WiFi.begin(GIOT_WIFI_AP, GIOT_WIFI_PASSWORD);
+  WiFi.begin(CONFIG_GIOT_WIFI_AP, CONFIG_GIOT_WIFI_PASSWORD);
 
   int iterations_left = 100;
   while (iterations_left > 0 && WiFi.status() != WL_CONNECTED) {
