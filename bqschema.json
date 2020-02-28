@@ -1,0 +1,108 @@
+[
+  {
+    "mode": "NULLABLE", 
+    "name": "Timestamp", 
+    "type": "TIMESTAMP"
+  }, 
+  {
+    "mode": "NULLABLE", 
+    "name": "DeviceId", 
+    "type": "STRING"
+  }, 
+  {
+    "fields": [
+      {
+        "name": "Temperature", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "Pressure", 
+        "type": "FLOAT"
+      }
+    ], 
+    "mode": "NULLABLE", 
+    "name": "BMP280", 
+    "type": "RECORD"
+  }, 
+  {
+    "fields": [
+      {
+        "name": "Temperature", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "Humidity", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "CO2", 
+        "type": "FLOAT"
+      }
+    ], 
+    "mode": "NULLABLE", 
+    "name": "SCD30", 
+    "type": "RECORD"
+  }, 
+  {
+    "fields": [
+      {
+        "name": "CO2", 
+        "type": "INTEGER"
+      }, 
+      {
+        "name": "TVOC", 
+        "type": "INTEGER"
+      }, 
+      {
+        "name": "BaselineCO2", 
+        "type": "INTEGER"
+      }, 
+      {
+        "name": "BaselineTVOC", 
+        "type": "INTEGER"
+      }, 
+      {
+        "name": "H2", 
+        "type": "INTEGER"
+      }, 
+      {
+        "name": "Ethanol", 
+        "type": "INTEGER"
+      }
+    ], 
+    "mode": "NULLABLE", 
+    "name": "SGP30", 
+    "type": "RECORD"
+  }, 
+  {
+    "fields": [
+      {
+        "name": "PM10Smoke", 
+        "type": "INTEGER"
+      }, 
+      {
+        "name": "PM25Smoke", 
+        "type": "INTEGER"
+      }, 
+      {
+        "name": "PM100Smoke", 
+        "type": "INTEGER"
+      }, 
+      {
+        "name": "PM10Env", 
+        "type": "INTEGER"
+      }, 
+      {
+        "name": "PM25Env", 
+        "type": "INTEGER"
+      }, 
+      {
+        "name": "PM100Env", 
+        "type": "INTEGER"
+      }
+    ], 
+    "mode": "NULLABLE", 
+    "name": "SMUART04L", 
+    "type": "RECORD"
+  }
+]
