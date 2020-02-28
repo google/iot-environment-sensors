@@ -35,4 +35,4 @@ if ! gcloud iot devices describe ${DEVID} --project="${PROJECT_ID}" --region="${
 fi
 
 spiffsgen.py 983040 spiffs/ spiffs.bin
-esptool.py --chip esp32 -p /dev/ttyUSB0 -b 115200 write_flash -z 0x310000 spiffs.bin
+esptool.py -p /dev/ttyUSB0 -b 460800 write_flash --flash_mode dio --flash_size detect --flash_freq 40m 0x1000 build/bootloader/bootloader.bin 0x8000 build/partition_table/partition-table.bin 0xd000 build/ota_data_initial.bin 0x10000 build/hello-world.bin 0x310000 spiffs.bin
