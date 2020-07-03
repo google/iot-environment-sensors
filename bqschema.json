@@ -104,5 +104,10 @@
     "mode": "NULLABLE", 
     "name": "SMUART04L", 
     "type": "RECORD"
-  }
+  },
+  {
+    "mode": "NULLABLE", 
+    "name": "PhysicalLocation", 
+    "type": "STRING"
+  } 
 ]

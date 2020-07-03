@@ -99,6 +99,7 @@ type BQRow struct {
 	SCD30     SCD30
 	SGP30     SGP30
 	SMUART04L SMUART04L
+	PhysicalLocation string
 }
 
 func (n *BQRow) FromUpdate(update *SensorUpdate, deviceId string) {
@@ -108,6 +109,11 @@ func (n *BQRow) FromUpdate(update *SensorUpdate, deviceId string) {
 	n.SCD30.FromProto(update.Scd30)
 	n.SGP30.FromProto(update.Sgp30)
 	n.SMUART04L.FromProto(update.Smuart04L)
+	location, ok := LocationMap[deviceId]
+	if !ok {
+	    location = "UnknownLocation"
+	}
+	n.PhysicalLocation = location
 }
 
 func GasTranslator(ctx context.Context, m PubSubMessage) error {
@@ -118,19 +124,18 @@ func GasTranslator(ctx context.Context, m PubSubMessage) error {
 		log.Printf("Parse failed: %v.\n", err)
 		return err
 	}
-	ctx.
 
 	bqrow := BQRow{}
 	bqrow.FromUpdate(update, m.Attributes["deviceId"])
 	log.Printf("Received update %v\n", bqrow)
 
-	client, err := bigquery.NewClient(ctx, os.GetEnv("PROJECT_ID"))
+	client, err := bigquery.NewClient(ctx, os.Getenv("PROJECT_ID"))
 	if err != nil {
 		log.Printf("Failed to set up BigQuery client: %s\n", err)
 		return err
 	}
 
-	u := client.Dataset(os.GetEnv("BQ_DATASET")).Table(os.GetEnv("BQ_TABLE")).Inserter()
+	u := client.Dataset(os.Getenv("BQ_DATASET")).Table(os.Getenv("BQ_TABLE")).Inserter()
 
 	items := []*BQRow{&bqrow}
 
@@ -143,7 +148,7 @@ func GasTranslator(ctx context.Context, m PubSubMessage) error {
 }
 func ReportDoubleMetric(ctx context.Context, c *monitoring.MetricClient, ts *timestamp.Timestamp, m PubSubMessage, metricType string, metricLabels map[string]string, value float64) error {
 	req := &monitoringpb.CreateTimeSeriesRequest{
-		Name: fmt.Sprintf("projects/%s", os.GetEnv("PROJECT_ID")),
+		Name: fmt.Sprintf("projects/%s", os.Getenv("PROJECT_ID")),
 		TimeSeries: []*monitoringpb.TimeSeries{{
 			Metric: &metricpb.Metric{
 				Type:   metricType,
@@ -153,8 +158,8 @@ func ReportDoubleMetric(ctx context.Context, c *monitoring.MetricClient, ts *tim
 				Type: "generic_node",
 				Labels: map[string]string{
 					"node_id":   m.Attributes["deviceId"],
-					"namespace": os.GetEnv("SD_NAMESPACE"),
-                    "location":  os.GetEnv("SD_LOCATION"),
+					"namespace": os.Getenv("SD_NAMESPACE"),
+                    "location":  os.Getenv("SD_LOCATION"),
 				},
 			},
 			Points: []*monitoringpb.Point{
@@ -183,7 +188,7 @@ func ReportDoubleMetric(ctx context.Context, c *monitoring.MetricClient, ts *tim
 
 func ReportIntMetric(ctx context.Context, c *monitoring.MetricClient, ts *timestamp.Timestamp, m PubSubMessage, metricType string, metricLabels map[string]string, value int64) error {
 	req := &monitoringpb.CreateTimeSeriesRequest{
-		Name: fmt.Sprintf("projects/%s", os.GetEnv("PROJECT_ID")),
+		Name: fmt.Sprintf("projects/%s", os.Getenv("PROJECT_ID")),
 		TimeSeries: []*monitoringpb.TimeSeries{{
 			Metric: &metricpb.Metric{
 				Type:   metricType,
@@ -193,8 +198,8 @@ func ReportIntMetric(ctx context.Context, c *monitoring.MetricClient, ts *timest
 				Type: "generic_node",
 				Labels: map[string]string{
 					"node_id":   m.Attributes["deviceId"],
-					"namespace": os.GetEnv("SD_NAMESPACE"),
-                    "location":  os.GetEnv("SD_LOCATION"),
+					"namespace": os.Getenv("SD_NAMESPACE"),
+                    "location":  os.Getenv("SD_LOCATION"),
 				},
 			},
 			Points: []*monitoringpb.Point{
